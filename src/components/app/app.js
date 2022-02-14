@@ -8,12 +8,12 @@ import './app.css';
 
 function App() {
 
-const data = [
-    {name: 'Raffaello Santi', salary: 1200, increase: false, id: 1},
-    {name: 'Michelangelo Simoni', salary: 3000, increase: true, id: 2},
-    {name: 'Leonardo da Vinci', salary: 1700, increase: false, id: 3},
-    {name: 'Donato Bardi', salary: 4500, increase: false, id: 4}
-]
+    const data = [
+        {name: 'Raffaello Santi', salary: 1200, increase: false, id: 1},
+        {name: 'Michelangelo Simoni', salary: 3000, increase: true, id: 2},
+        {name: 'Leonardo da Vinci', salary: 1700, increase: false, id: 3},
+        {name: 'Donato Bardi', salary: 4500, increase: false, id: 4}
+    ]
 
     return (
         <div className="app">
