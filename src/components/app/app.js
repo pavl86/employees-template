@@ -19,6 +19,23 @@ class App extends Component {
                 {name: 'Donato Bardi', salary: 4500, increase: false, id: 4}
             ]
         }
+        this.maxId = 5;
+    }
+
+    addItem = (name, salary) => {
+        const newItem ={
+            name,
+            salary,
+            increase: false,
+            id: this.maxId++
+        }
+
+        this.setState(({data}) => {
+            const newArr =[...data, newItem];
+            return {
+                data: newArr
+            }
+        });
     }
 
     deleteItem = (id) => {
@@ -42,7 +59,8 @@ class App extends Component {
                 <EmployeesList 
                     data={this.state.data}
                     onDelete={this.deleteItem}/>
-                <EmployeesAddFort/>
+                <EmployeesAddFort 
+                    onAdd={this.addItem}/>
             </div>
         );
     }
