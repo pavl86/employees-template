@@ -8,6 +8,9 @@ import EmployeesAddFort from '../employees-add-form/employees-add-form';
 
 import './app.css';
 
+// let totalEmployees = 5;
+// let totalBonuses = 3;
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -47,7 +50,7 @@ class App extends Component {
         })
     }
 
-    onToggleIncrease = (id) => {
+    onToggleIncrease = (id) => {        
         this.setState(({data}) => ({
             data: data.map(item => {
               if (item.id === id) {
@@ -59,13 +62,23 @@ class App extends Component {
     }
 
     onToggleRise = (id) => {
-        console.log(`Rise this ${id}`);
+        this.setState(({data}) => ({
+            data: data.map(item => {
+              if (item.id === id) {
+                  return {...item, rise: !item.rise}
+              } 
+              return item;
+            })
+        }))
     }
 
     render() {
+        const emploees = this.state.data.length;
+        const increased = this.state.data.filter(item => item.increase).length;
+
         return (
             <div className="app">
-                <AppInfo/>
+                <AppInfo emploees={emploees} increased={increased}/>
     
                 <div className='search-panel'>
                     <SearchPanel/>
