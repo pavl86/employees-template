@@ -20,7 +20,8 @@ class App extends Component {
                 {name: 'Michelangelo Simoni', salary: 3000, increase: true, rise: true, id: 2},
                 {name: 'Leonardo da Vinci', salary: 1700, increase: false, rise: false, id: 3},
                 {name: 'Donato Bardi', salary: 4500, increase: false, rise: false, id: 4}
-            ]
+            ],
+            term: ''
         }
         this.maxId = 5;
     }
@@ -36,8 +37,10 @@ class App extends Component {
 
         this.setState(({data}) => {
             const newArr =[...data, newItem];
-            return {
-                data: newArr
+            if (name.length >= 3 && salary > 200) {
+                return {
+                    data: newArr
+                }
             }
         });
     }
@@ -61,21 +64,38 @@ class App extends Component {
         }))
     }
 
+    searchEmp = (items, term) => {
+        if (term.length === 0) {
+            return items;
+        }
+
+        return items.filter(item => {
+            return item.name.indexOf(term) > -1
+        })
+    }
+
+    onUpdateSearch = (term) => {
+        this.setState({term});
+    }
+
     render() {
+        const {data, term} = this.state;
         const emploees = this.state.data.length;
         const increased = this.state.data.filter(item => item.increase).length;
+        const visibleData = this.searchEmp(data, term);
 
         return (
             <div className="app">
                 <AppInfo emploees={emploees} increased={increased}/>
     
                 <div className='search-panel'>
-                    <SearchPanel/>
+                    <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
                     <AppFilter/>
                 </div>
     
                 <EmployeesList 
-                    data={this.state.data}
+                    // data={this.state.data}
+                    data={visibleData}
                     onDelete={this.deleteItem}
                     onToggleProp={this.onToggleProp}/>
                 <EmployeesAddFort 
